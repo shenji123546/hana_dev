@@ -1,0 +1,12 @@
+PROCEDURE "HXWEXPRESS.HXEDB.fff::pro111"( )
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   READS SQL DATA AS
+BEGIN
+   /*************************************
+       Write your procedure logic 
+   *************************************/
+tcc = select * from  "HXWEX"."HXWEXPRESS.HXEDB::SalesOrders";
+   select * from :tcc;
+END

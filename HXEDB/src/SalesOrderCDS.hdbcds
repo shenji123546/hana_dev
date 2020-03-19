@@ -1,0 +1,18 @@
+namespace HXWEXPRESS.HXEDB;
+
+/*@@layout{"layoutInfo":{"x":-221.3623046875,"y":-65}}*/
+entity SalesOrders {
+    key OrderID   : String(20) not null;
+        Customer  : String(20);
+        OrderDate : LocalDate;
+        Product   : String(10);
+        Amount    : Decimal(10, 2);
+};
+
+/*@@layout{"layoutInfo":{"x":-368,"y":-81.5}}*/
+entity Customer {
+    key Customer : String(20) not null;
+        Name     : String(20);
+        Countury : String(10);
+        Status   : String(10);
+};

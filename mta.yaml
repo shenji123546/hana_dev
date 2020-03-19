@@ -1,0 +1,19 @@
+ID: HXWEXPRESS
+_schema-version: '2.1'
+version: 0.0.1
+
+modules:
+ - name: HXEDB
+   type: hdb
+   path: HXEDB
+   requires:
+    - name: hdi_HXEDB
+
+resources:
+ - name: hdi_HXEDB
+   parameters:
+      config:
+         schema: HXWEX
+   properties:
+      hdi-container-name: ${service-name}
+   type: com.sap.xs.hdi-container

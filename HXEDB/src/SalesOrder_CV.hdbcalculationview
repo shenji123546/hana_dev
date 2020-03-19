@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="HXWEXPRESS.HXEDB::SalesOrder_CV" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="SalesOrder_CV"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="HXWEXPRESS.HXEDB::SalesOrders">
+    <resourceUri>HXWEXPRESS.HXEDB::SalesOrders</resourceUri>
+  </DataSource>
+  <DataSource id="HXWEXPRESS.HXEDB::Customer">
+    <resourceUri>HXWEXPRESS.HXEDB::Customer</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="SalesOrder">
+    <viewAttributes>
+      <viewAttribute id="OrderID"/>
+      <viewAttribute id="Customer"/>
+      <viewAttribute id="OrderDate"/>
+      <viewAttribute id="Product"/>
+      <viewAttribute id="Amount"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="HXWEXPRESS.HXEDB::SalesOrders">
+      <mapping xsi:type="Calculation:AttributeMapping" target="OrderID" source="OrderID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Customer" source="Customer"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="OrderDate" source="OrderDate"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Product" source="Product"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Amount" source="Amount"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Customer">
+    <viewAttributes>
+      <viewAttribute id="Customer"/>
+      <viewAttribute id="Name"/>
+      <viewAttribute id="Countury"/>
+      <viewAttribute id="Status"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="HXWEXPRESS.HXEDB::Customer">
+      <mapping xsi:type="Calculation:AttributeMapping" target="Customer" source="Customer"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Name" source="Name"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Countury" source="Countury"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Status" source="Status"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="C1_N" joinType="leftOuter">
+    <viewAttributes>
+      <viewAttribute id="OrderID"/>
+      <viewAttribute id="Customer"/>
+      <viewAttribute id="OrderDate"/>
+      <viewAttribute id="Product"/>
+      <viewAttribute id="Amount" aggregationType="sum"/>
+      <viewAttribute id="Name"/>
+      <viewAttribute id="Countury"/>
+      <viewAttribute id="Status"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="SalesOrder">
+      <mapping xsi:type="Calculation:AttributeMapping" target="OrderID" source="OrderID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Customer" source="Customer"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="OrderDate" source="OrderDate"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Product" source="Product"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Amount" source="Amount"/>
+    </input>
+    <input node="Customer">
+      <mapping xsi:type="Calculation:AttributeMapping" target="Name" source="Name"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Countury" source="Countury"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Status" source="Status"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Customer" source="Customer"/>
+    </input>
+    <joinAttribute name="Customer"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="OrderID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="OrderID"/>
+      <keyMapping columnObjectName="Join_1" columnName="OrderID"/>
+    </attribute>
+    <attribute id="Customer" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Customer"/>
+      <keyMapping columnObjectName="Join_1" columnName="Customer"/>
+    </attribute>
+    <attribute id="OrderDate" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="OrderDate"/>
+      <keyMapping columnObjectName="Join_1" columnName="OrderDate"/>
+    </attribute>
+    <attribute id="Product" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Product"/>
+      <keyMapping columnObjectName="Join_1" columnName="Product"/>
+    </attribute>
+    <attribute id="Name" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Name"/>
+      <keyMapping columnObjectName="Join_1" columnName="Name"/>
+    </attribute>
+    <attribute id="Countury" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Countury"/>
+      <keyMapping columnObjectName="Join_1" columnName="Countury"/>
+    </attribute>
+    <attribute id="Status" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Status"/>
+      <keyMapping columnObjectName="Join_1" columnName="Status"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="Amount" order="5" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Amount"/>
+      <measureMapping columnObjectName="Join_1" columnName="Amount"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="92.00000000000009" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="false" modelObjectName="SalesOrder" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="208" y="262.5"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="false" modelObjectName="Customer" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="-28.999999999999886" y="263"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92" y="182"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="SalesOrder" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="291" y="42"/>
+      <rectangleSize width="142.021484375"/>
+    </shape>
+    <shape modelObjectName="Customer" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="25" y="30"/>
+      <rectangleSize width="142.021484375"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>
